@@ -1,0 +1,30 @@
+{
+    "name": "Daniel Sebastian Macias",
+    "profession": "Desarrollador de Software",
+    "location": "Guadalajara, Mexico",
+    "email": "sebastian.macias@iteso.mx",
+    "photo": "/img/foto.jpg",
+    "summary": "Desarrollador de software enfocado en construir aplicaciones web confiables con Node.js y TypeScript.",
+    "about": "Soy estudiante de Ingenieria en Sistemas Computacionales. Me interesa el desarrollo de software, sobre todo construir APIs con Node.js y Express. Estoy aprendiendo TypeScript y bases de datos.",
+    "available": true,
+    "experiences": [
+        {
+            "role": "Desarrollador Frontend",
+            "company": "Corae",
+            "period": "2026 - presente",
+            "description": "Desarrolle APIs REST y di mantenimiento a aplicaciones del lado del servidor."
+        },
+        {
+            "role": "Desarrollador Backend",
+            "company": "Corae",
+            "period": "2026 - presente",
+            "description": "Construi proyectos con TypeScript, Express y motores de plantillas."
+        }
+    ],
+    "skills": ["Node.js", "Express", "TypeScript", "Handlebars", "Git", "REST APIs", "SQL", "NoSQL", "Docker", "AWS", "Cloudflare", "Linux"],
+    "contact": {
+        "phone": "+52 3327895726",
+        "linkedin": "https://www.linkedin.com/in/daniel-sebastian-macias-macias-68217a354/",
+        "github": "https://github.com/sebastian0023"
+    }
+}
