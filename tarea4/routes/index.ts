@@ -49,7 +49,7 @@ router.get('/', (req: Request, res: Response) => {
 
 router.get('/acerca', (req: Request, res: Response) => {
     res.render('info', {
-        title: 'Experience',
+        title: 'Experiencia',
         name: cv.name,
         experiences: cv.experiences,
         skills: cv.skills
@@ -58,7 +58,7 @@ router.get('/acerca', (req: Request, res: Response) => {
 
 router.get('/contacto', (req: Request, res: Response) => {
     res.render('contact', {
-        title: 'Contact',
+        title: 'Contacto',
         name: cv.name,
         email: cv.email,
         phone: cv.contact.phone,
