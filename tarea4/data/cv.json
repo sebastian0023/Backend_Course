@@ -1,0 +1,30 @@
+{
+    "name": "Daniel Sebastian Macias",
+    "profession": "Backend Developer",
+    "location": "Guadalajara, Mexico",
+    "email": "sebastian.macias@iteso.mx",
+    "photo": "/img/foto.jpg",
+    "summary": "Backend developer focused on building reliable web applications with Node.js and TypeScript.",
+    "about": "Soy estudiante de Ingenieria en Sistemas Computacionales. Me interesa el desarrollo backend, sobre todo construir APIs con Node.js y Express. Estoy aprendiendo TypeScript y bases de datos.",
+    "available": true,
+    "experiences": [
+        {
+            "role": "Backend Developer",
+            "company": "Company Name",
+            "period": "2024 - Present",
+            "description": "Developed REST APIs and maintained server-side applications."
+        },
+        {
+            "role": "Software Development Student",
+            "company": "Backend Course",
+            "period": "2023 - 2024",
+            "description": "Built projects with TypeScript, Express, and template engines."
+        }
+    ],
+    "skills": ["Node.js", "Express", "TypeScript", "Handlebars", "Git"],
+    "contact": {
+        "phone": "+52 3327895726",
+        "linkedin": "https://www.linkedin.com/in/daniel-sebastian-macias-macias-68217a354/",
+        "github": "https://github.com/sebastian0023"
+    }
+}

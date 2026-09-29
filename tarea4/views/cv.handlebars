@@ -1,0 +1,29 @@
+<main class="cv-card">
+    <header class="cv-header">
+        <img src="{{photo}}" alt="Foto de {{name}}" class="cv-photo">
+        <h1>{{name}}</h1>
+        <h2>{{profession}}</h2>
+        <p>{{location}} · {{email}}</p>
+
+        {{#if available}}
+            <p>Disponible para proyectos</p>
+        {{else}}
+            <p>No disponible por ahora</p>
+        {{/if}}
+    </header>
+
+    <section>
+        <h3>Profile</h3>
+        <p>{{summary}}</p>
+    </section>
+
+    <section>
+        <h3>Acerca de mi</h3>
+        <p>{{about}}</p>
+    </section>
+
+    <nav class="cv-nav" aria-label="CV navigation">
+        <a href="/acerca">Experience</a>
+        <a href="/contacto">Contact</a>
+    </nav>
+</main>

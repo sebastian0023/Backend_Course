@@ -1,0 +1,32 @@
+<main class="cv-card">
+    <header class="cv-header">
+        <h1>{{name}}</h1>
+        <h2>Experience</h2>
+    </header>
+
+    {{#if experiences}}
+        {{#each experiences}}
+        <section class="experience">
+            <h3>{{role}}</h3>
+            <p><strong>{{company}}</strong> · {{period}}</p>
+            <p>{{description}}</p>
+        </section>
+        {{/each}}
+    {{else}}
+        <p>Todavia no hay experiencia registrada.</p>
+    {{/if}}
+
+    <section>
+        <h3>Skills</h3>
+        <ul>
+            {{#each skills}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </section>
+
+    <nav class="cv-nav" aria-label="CV navigation">
+        <a href="/">Profile</a>
+        <a href="/contacto">Contact</a>
+    </nav>
+</main>
