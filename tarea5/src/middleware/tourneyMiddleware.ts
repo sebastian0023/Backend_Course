@@ -1,11 +1,16 @@
 import type { Request, Response, NextFunction } from 'express';
+import { Error as MongooseError } from 'mongoose';
 import Tourney from '../models/tourneyModel';
-import { HttpError } from './httpError';
+
+export class HttpError extends Error {
+    constructor(public status: number, message: string) {
+        super(message);
+    }
+}
 
 const OBJECT_ID = /^[a-f\d]{24}$/i;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-// Solo se aceptan fechas calendario reales con formato YYYY-MM-DD.
 const parseDate = (value: unknown): Date | null => {
     if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
     const date = new Date(`${value}T00:00:00.000Z`);
@@ -13,7 +18,6 @@ const parseDate = (value: unknown): Date | null => {
     return date;
 };
 
-// Valida el cuerpo de POST /api/tournaments
 export const validateTourneyBody = (req: Request, _res: Response, next: NextFunction) => {
     const { name, registrationDeadline, eventDate } = req.body ?? {};
 
@@ -37,7 +41,6 @@ export const validateTourneyBody = (req: Request, _res: Response, next: NextFunc
     next();
 };
 
-// Valida :tournamentId, comprueba que el torneo exista y lo deja en res.locals.tournament
 export const loadTourney = async (req: Request, res: Response, next: NextFunction) => {
     const { tournamentId } = req.params;
     if (typeof tournamentId !== 'string' || !OBJECT_ID.test(tournamentId)) {
@@ -51,7 +54,6 @@ export const loadTourney = async (req: Request, res: Response, next: NextFunctio
     next();
 };
 
-// Valida el cuerpo de POST /api/tournaments/:tournamentId/participants
 export const validateParticipantBody = (req: Request, _res: Response, next: NextFunction) => {
     const { name, score } = req.body ?? {};
 
@@ -73,4 +75,24 @@ export const ensureRegistrationOpen = (_req: Request, res: Response, next: NextF
         throw new HttpError(400, 'El registro de participantes ya cerró (pasó la fecha límite)');
     }
     next();
+};
+
+export const notFound = (req: Request, _res: Response, next: NextFunction) => {
+    next(new HttpError(404, `Ruta no encontrada: ${req.method} ${req.originalUrl}`));
+};
+
+// Convierte cualquier error en una respuesta JSON con el código apropiado.
+export const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunction) => {
+    if (err instanceof HttpError) {
+        return res.status(err.status).json({ error: err.message });
+    }
+    // JSON mal formado en el body
+    if (err?.type === 'entity.parse.failed') {
+        return res.status(400).json({ error: 'El cuerpo de la solicitud no es un JSON válido' });
+    }
+    if (err instanceof MongooseError.ValidationError || err instanceof MongooseError.CastError) {
+        return res.status(400).json({ error: err.message });
+    }
+    console.error(err);
+    res.status(500).json({ error: 'Error interno del servidor' });
 };

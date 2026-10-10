@@ -1,8 +1,5 @@
 import { Schema, model } from 'mongoose';
 
-// Un lugar dentro de un enfrentamiento: un participante, un "Bye" o un lugar
-// todavía sin definir (name null e isBye false) que se llenará con el ganador
-// de la ronda anterior.
 const slotSchema = new Schema({
     participant: { type: Schema.Types.ObjectId, ref: 'Participant', default: null },
     name: { type: String, default: null },

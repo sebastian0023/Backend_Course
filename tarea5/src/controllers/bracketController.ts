@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import Participant from '../models/participantModel';
 import Bracket from '../models/bracketModel';
-import { HttpError } from '../middleware/httpError';
+import { HttpError } from '../middleware/tourneyMiddleware';
 import { buildBracket, formatBracket, MIN_PARTICIPANTS, type Round } from '../services/bracketService';
 
 export const generateBracket = async (_req: Request, res: Response) => {

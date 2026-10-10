@@ -41,7 +41,7 @@ npm run build && npm start
 ```
 src/
 ├── controllers/   tourney, participant, bracket
-├── middleware/    validaciones, carga de torneo (404), requestLogger, errorHandler
+├── middleware/    tourneyMiddleware.ts: validaciones, carga de torneo (404) y manejo de errores
 ├── models/        Tourney, Participant, Bracket
 ├── routes/
 ├── services/      bracketService.ts (siembra, Bye y rondas)
