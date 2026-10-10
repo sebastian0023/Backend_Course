@@ -3,7 +3,7 @@ export interface Entrant {
     name: string;
     score: number;
 }
-
+//
 export interface Slot {
     participant?: unknown;
     name?: string | null;
