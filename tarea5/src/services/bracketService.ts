@@ -10,7 +10,7 @@ export interface Slot {
     seed?: number | null;
     isBye: boolean;
 }
-
+////
 export interface Match {
     matchNumber: number;
     player1: Slot;
