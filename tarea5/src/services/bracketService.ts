@@ -3,14 +3,14 @@ export interface Entrant {
     name: string;
     score: number;
 }
-//
+
 export interface Slot {
     participant?: unknown;
     name?: string | null;
     seed?: number | null;
     isBye: boolean;
 }
-////
+
 export interface Match {
     matchNumber: number;
     player1: Slot;
