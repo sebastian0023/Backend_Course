@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluación Proyecto 3 — Equipo 4</title>
+<style>
+:root {
+  --iteso-azul: #003C71;
+  --iteso-azul-medio: #0067A5;
+  --iteso-azul-claro: #9BC4E2;
+  --gris-texto: #333333;
+  --gris-borde: #DDE3E9;
+  --fondo: #FFFFFF;
+  --ok: #1E7A3C;
+  --parcial: #B8860B;
+  --fallo: #A32020;
+  --fuente: "Gotham", "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--fondo); color: var(--gris-texto); font-family: var(--fuente); font-size: 14px; line-height: 1.5; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+header { border-bottom: 3px solid var(--iteso-azul); padding-bottom: 16px; margin-bottom: 20px; }
+.logo { color: var(--iteso-azul); font-weight: 700; letter-spacing: .08em; font-size: 28px; }
+h1 { color: var(--iteso-azul); font-size: 22px; margin: 8px 0 4px; }
+h2 { color: var(--iteso-azul); font-size: 18px; border-bottom: 1px solid var(--gris-borde); padding-bottom: 4px; margin-top: 32px; }
+h3 { color: var(--iteso-azul-medio); font-size: 15px; margin: 20px 0 6px; }
+.meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 4px 20px; font-size: 13px; }
+.meta b { color: var(--iteso-azul); }
+.aviso { border-left: 4px solid var(--iteso-azul-medio); background: #F3F8FC; padding: 10px 14px; margin: 14px 0; font-size: 13px; }
+.resultado { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+.tarjeta { border: 1px solid var(--gris-borde); border-radius: 8px; padding: 14px; }
+.tarjeta .k { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--iteso-azul-medio); }
+.tarjeta .v { font-size: 26px; font-weight: 700; color: var(--iteso-azul); }
+.badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; }
+.ok { background: var(--ok); } .parcial { background: var(--parcial); } .fallo { background: var(--fallo); }
+.tabla { overflow-x: auto; margin: 8px 0 16px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { background: var(--iteso-azul); color: #fff; text-align: left; padding: 6px 8px; font-weight: 600; }
+td { border-bottom: 1px solid var(--gris-borde); padding: 6px 8px; vertical-align: top; }
+tr.sub td { background: #F3F8FC; font-weight: 700; color: var(--iteso-azul); }
+td.num, th.num { text-align: right; white-space: nowrap; }
+code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; word-break: break-all; }
+.barra { display: grid; grid-template-columns: 220px 1fr 70px; align-items: center; gap: 10px; margin: 6px 0; }
+.barra .pista { height: 12px; background: var(--gris-borde); border-radius: 6px; overflow: hidden; }
+.barra .relleno { height: 100%; background: var(--iteso-azul-medio); }
+pre { white-space: pre-wrap; background: #F6F8FA; border: 1px solid var(--gris-borde); border-radius: 6px; padding: 10px; font-size: 12px; overflow-x: auto; }
+ul { padding-left: 20px; }
+footer { margin-top: 40px; border-top: 1px solid var(--gris-borde); padding-top: 12px; font-size: 12px; color: #555; }
+button.imprimir { background: var(--iteso-azul); color: #fff; border: 0; border-radius: 6px; padding: 8px 14px; cursor: pointer; font-family: var(--fuente); }
+@media (max-width: 640px) { .barra { grid-template-columns: 1fr; } .tarjeta .v { font-size: 22px; } }
+@media print {
+  .imprimir { display: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tr, .tarjeta, pre { break-inside: avoid; }
+  @page { size: A4; margin: 15mm; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <!-- Logotipo: sustituir este texto por el archivo oficial embebido en base64 si se dispone de él. -->
+  <div class="logo">ITESO</div>
+  <h1>Evaluación de proyecto 3 — Clasificador de imágenes</h1>
+  <div class="meta">
+    <div><b>Materia:</b> MLOPS</div>
+    <div><b>Equipo:</b> 4</div>
+    <div><b>Repositorio:</b> <span class="mono">github.com/sebastian0023/Proyecto-3-Clasificador-de-imagenes</span></div>
+    <div><b>Hash evaluado:</b> <span class="mono">e78163c</span> (combinación local, ver aviso)</div>
+    <div><b>Release de dataset:</b> 0.1.3 (<span class="mono">2200274d…</span>)</div>
+    <div><b>Versión de modelo:</b> 1.0.0 (activa)</div>
+    <div><b>Fecha:</b> 2 de octubre de 2026</div>
+  </div>
+  <div class="aviso"><b>Evaluación previa del equipo, no oficial.</b> Repite el protocolo del docente sobre una <b>combinación local</b> que no existe en GitHub. Parte de <span class="mono">fix/m1-training</span> = <span class="mono">main</span> = <span class="mono">3e423c4</span> y fusiona los PR #23 (<span class="mono">b900c61</span>), #25 (<span class="mono">5090248</span>) y #26 (<span class="mono">e56c658</span>), sin conflictos. El resultado solo vale si esos tres PR llegan a <span class="mono">main</span> tal como están.</div>
+  <button class="imprimir" onclick="window.print()">Imprimir / PDF</button>
+</header>
+
+<section>
+  <div class="resultado">
+    <div class="tarjeta"><div class="k">Calificación final</div><div class="v">88 / 100</div></div>
+    <div class="tarjeta"><div class="k">Escala</div><div class="v" style="font-size:20px">Bueno (75-89)</div></div>
+    <div class="tarjeta"><div class="k">Compuerta (M1–M4)</div><div class="v" style="font-size:18px"><span class="badge ok">NO ACTIVADA</span></div></div>
+    <div class="tarjeta"><div class="k">Meta 85% en test</div><div class="v" style="font-size:18px"><span class="badge ok">Alcanzada · 0.97931</span></div></div>
+  </div>
+</section>
+
+<h2>Resumen por sección</h2>
+<div class="barra"><span>1. Integración y datos</span><div class="pista"><div class="relleno" style="width:85.7%"></div></div><span class="num">12 / 14</span></div>
+<div class="barra"><span>2. Modelo y reproducibilidad</span><div class="pista"><div class="relleno" style="width:100%"></div></div><span class="num">18 / 18</span></div>
+<div class="barra"><span>3. Experimentos y MLflow</span><div class="pista"><div class="relleno" style="width:100%"></div></div><span class="num">14 / 14</span></div>
+<div class="barra"><span>4. Evaluación final</span><div class="pista"><div class="relleno" style="width:91.7%"></div></div><span class="num">16.5 / 18</span></div>
+<div class="barra"><span>5. Versión, tarjeta y S3</span><div class="pista"><div class="relleno" style="width:100%"></div></div><span class="num">10 / 10</span></div>
+<div class="barra"><span>6. Portal integrado</span><div class="pista"><div class="relleno" style="width:69.4%"></div></div><span class="num">12.5 / 18</span></div>
+<div class="barra"><span>7. Pruebas, CI y repositorio</span><div class="pista"><div class="relleno" style="width:62.5%"></div></div><span class="num">5 / 8</span></div>
+
+<h2>A. Requisitos mínimos</h2>
+<div class="tabla"><table>
+<tr><th>Estado</th><th>Requisito</th><th>Evidencia</th></tr>
+<tr><td><span class="badge ok">CUMPLE</span></td><td>M1 Arranque con el README; portal, worker, MLflow y Training</td><td>Se siguió el README desde un clon limpio: <code>up.py</code> (MLflow vacío) → <code>dvc pull</code> de <code>raw</code>, del manifiesto y del snapshot → <code>generate_crops</code> → <code>up.py</code>, que imprime “Snapshot restaurado”, reinicia MLflow y deja 12 corridas FINISHED. En el navegador: Overview carga; Training selecciona <b>0.1.3</b>, muestra 0.1.1 deshabilitado (“no registra archive_sha256”) y 0.1.2/0.1.4/0.1.5 deshabilitados (“sin manifiesto congelado”), y no hay errores de página. Se generó <code>m-0.1.3-s42-1</code> y el lanzamiento en <code>p3-pruebas</code> devolvió <b>202</b> con el job <code>130b7c0b…</code>. Al recargar durante el trabajo se ven <code>running</code> y los logs; termina en <code>succeeded</code> con el run <code>4de234cd…</code>.</td></tr>
+<tr><td><span class="badge ok">CUMPLE</span></td><td>M2 Consume un release aprobado y versionado</td><td>Tags del run: <code>release_id=0.1.3</code>, <code>release_hash=2200274d…</code>, <code>dvc_md5=ca56420c….dir</code>, <code>manifest_hash=45600f29…</code>, <code>crops_jsonl_sha256=d3d61f35…</code>. Ese último coincide con los recortes regenerados en este clon. <code>versions.json</code> marca 0.1.3 como <code>pass</code> y publicado en <code>prod</code>.</td></tr>
+<tr><td><span class="badge ok">CUMPLE</span></td><td>M3 Train/val/test aislados</td><td>Las intersecciones entre particiones por <code>crop_id</code>, <code>source_image_id</code> y <code>dup_group_id</code> son 0 en los tres pares. La aumentación aleatoria en eval la detectan las pruebas (M5b y M5c). La selección (2026-09-27T03:39Z) es anterior a la evaluación (2026-09-28T02:25Z).</td></tr>
+<tr><td><span class="badge ok">CUMPLE</span></td><td>M4 Modelo recargable para inferencia</td><td>Se descargó <code>model.pt</code> 1.0.0 de S3 (SHA-256 <code>e4acca42…9172</code>) y se cargó en un proceso limpio con su mapa de clases y su preprocesamiento. Al re-inferir el test salen 142/145, y las 145 clases coinciden con el CSV del equipo (diferencia máxima de probabilidad: 1.1e-6).</td></tr>
+</table></div>
+<p><b>Compuerta:</b> <span class="badge ok">NO ACTIVADA</span></p>
+
+<h2>B. Tabla de calificación</h2>
+<div class="tabla"><table>
+<tr><th class="num">Puntos</th><th>Requisito</th><th>Lo que falta</th></tr>
+<tr><td class="num">2 / 4</td><td>1.1 Traspaso real desde Proyecto 2</td><td>En Training solo se puede elegir 0.1.3. <code>POST /api/p3/manifests</code> con 0.1.2 responde 409 “sin manifiesto congelado”, así que cambiar de release no cambia ni el manifiesto ni los conteos en el portal; <code>demo_cambio_release.py</code> solo lo muestra con un fixture. Congelar <code>m-0.1.2-s42-1</code> (con sus recortes) en <code>p3.data.frozen</code>.</td></tr>
+<tr><td class="num">5 / 5</td><td>1.2 Recortes COCO y clases previas</td><td>—</td></tr>
+<tr><td class="num">5 / 5</td><td>1.3 Manifiesto 70/20/10 sin fuga</td><td>—</td></tr>
+<tr class="sub"><td class="num">12 / 14</td><td>Subtotal Integración y datos</td><td></td></tr>
+<tr><td class="num">5 / 5</td><td>2.1 Clasificador entrenado</td><td>—</td></tr>
+<tr><td class="num">4 / 4</td><td>2.2 Minibatches y parámetros</td><td>—</td></tr>
+<tr><td class="num">4 / 4</td><td>2.3 Semillas y aumentación</td><td>— (observación: el tag <code>env.deterministic</code> vale <code>False</code> en el primer trabajo del worker y <code>True</code> en el segundo, aunque las métricas son idénticas)</td></tr>
+<tr><td class="num">5 / 5</td><td>2.4 Curvas, early stopping y mejor checkpoint</td><td>—</td></tr>
+<tr class="sub"><td class="num">18 / 18</td><td>Subtotal Modelo y reproducibilidad</td><td></td></tr>
+<tr><td class="num">6 / 6</td><td>3.1 Diez experimentos válidos</td><td>—</td></tr>
+<tr><td class="num">5 / 5</td><td>3.2 Registro completo en MLflow</td><td>—</td></tr>
+<tr><td class="num">3 / 3</td><td>3.3 Comparación y elección reproducible</td><td>—</td></tr>
+<tr class="sub"><td class="num">14 / 14</td><td>Subtotal Experimentos y MLflow</td><td></td></tr>
+<tr><td class="num">5 / 5</td><td>4.1 Protocolo de prueba congelado</td><td>—</td></tr>
+<tr><td class="num">4 / 4</td><td>4.2 Matriz y métricas</td><td>—</td></tr>
+<tr><td class="num">6 / 6</td><td>4.3 Umbral de 85% en test</td><td>—</td></tr>
+<tr><td class="num">1.5 / 3</td><td>4.4 Interpretación de errores</td><td>Evaluation lista los aciertos y errores solo por <code>crop_id</code>, sin la imagen del recorte (0 <code>&lt;img&gt;</code> en la página). Hay baseline (51.7%) y clase más confundida (cat→dog, 2). Falta mostrar los recortes.</td></tr>
+<tr class="sub"><td class="num">16.5 / 18</td><td>Subtotal Evaluación final</td><td></td></tr>
+<tr><td class="num">4 / 4</td><td>5.1 Paquete de modelo completo</td><td>—</td></tr>
+<tr><td class="num">4 / 4</td><td>5.2 AWS S3 real y recuperable</td><td>—</td></tr>
+<tr><td class="num">2 / 2</td><td>5.3 Registro y versionado navegables</td><td>—</td></tr>
+<tr class="sub"><td class="num">10 / 10</td><td>Subtotal Versión, tarjeta y S3</td><td></td></tr>
+<tr><td class="num">4 / 4</td><td>6.1 Training</td><td>—</td></tr>
+<tr><td class="num">3 / 3</td><td>6.2 Experiments</td><td>—</td></tr>
+<tr><td class="num">1.5 / 3</td><td>6.3 Evaluation</td><td>La página no muestra el candidato (<code>9f9b62c2…</code>) ni la versión de datos (<code>m-0.1.3-s42-1</code> / <code>45600f29…</code>), aunque <code>GET /api/p3/evaluation</code> sí devuelve <code>run_id</code> y <code>manifest_id</code>. Mostrarlos en la página.</td></tr>
+<tr><td class="num">2 / 4</td><td>6.4 Models</td><td>No hay acción para descargar los pesos ni el paquete: la página solo enlaza la “tarjeta” y tiene el botón “Usar 0.9.0”. Agregar la descarga con SHA-256 y VersionId.</td></tr>
+<tr><td class="num">2 / 4</td><td>6.5 Inference</td><td><code>POST /api/p3/inference/{id}/send-to-annotation</code> → <b>502</b> “P1 no aceptó la imagen: Network is unreachable”: el arranque del README no levanta P1 (:3000). Integrar P1 al arranque o documentarlo, y permitir elegir un recorte ya existente desde el portal.</td></tr>
+<tr class="sub"><td class="num">12.5 / 18</td><td>Subtotal Portal integrado</td><td></td></tr>
+<tr><td class="num">2 / 4</td><td>7.1 Pruebas que detectan fallas y TDD</td><td>Si se quita <code>"dup_group_id"</code> de <code>LEAKAGE_FIELDS</code> (<code>src/p3/data/dataset.py:30</code>), las 463 pruebas siguen en verde. Agregar una prueba con dos originales distintos del mismo <code>dup_group_id</code> en train y test.</td></tr>
+<tr><td class="num">1 / 2</td><td>7.2 Prueba de integración del recorrido</td><td><code>tests/test_e2e.py</code> corre en memoria con un S3 falso, y la suite de navegador (<code>tests/e2e/pantallas.spec.ts</code>) no abre ninguna página de P3. Falta una prueba con MLflow real, MinIO y el portal, de release a inferencia.</td></tr>
+<tr><td class="num">2 / 2</td><td>7.3 CI, lint y secretos</td><td>—</td></tr>
+<tr class="sub"><td class="num">5 / 8</td><td>Subtotal Pruebas, CI y repositorio</td><td></td></tr>
+</table></div>
+
+<h2>C. Trazabilidad de extremo a extremo</h2>
+<div class="tabla"><table>
+<tr><th>Release DVC y hash</th><th>Manifiesto 70/20/10 y hash</th><th>Run MLflow elegido</th><th>Checkpoint</th><th>Versión de modelo</th><th>S3 bucket/key y hash</th><th>Predicción de prueba</th></tr>
+<tr>
+<td>0.1.3 · huella <code>2200274dc6bbe6d0…</code> · DVC <code>ca56420c9992f8b7….dir</code></td>
+<td><code>m-0.1.3-s42-1</code> · SHA-256 <code>45600f297d13f516…4305</code> (regenerado dos veces, idéntico)</td>
+<td><code>9f9b62c202f0446a8a4b411a10321eff</code> (val_acc 0.99658, mejor época 6)</td>
+<td><code>mlflow-artifacts:/3/9f9b…/checkpoint/model.pt</code> · SHA-256 <code>e4acca429ebf73d0…9172</code></td>
+<td>1.0.0 (activa); 0.9.0 recuperable (<code>ab4d1f44…</code>)</td>
+<td><code>s3://dataset-quality-releases-750702272375/models/clasificador/1.0.0/model.pt</code> · VersionId <code>VtRww5se97lomVTcKJUv6d9mYSL7TXOf</code> · SHA-256 local <code>e4acca42…9172</code></td>
+<td>Inferencia <code>c4cd8311…</code>: perro → <code>dog</code> 0.999998, <code>model_sha256=e4acca42…</code>; re-inferencia del test 142/145</td>
+</tr>
+</table></div>
+
+<h2>D. Contraste de métricas</h2>
+<div class="tabla"><table>
+<tr><th>Métrica</th><th class="num">Reportado por el equipo</th><th class="num">Verificado por el evaluador</th><th>¿Coincide?</th></tr>
+<tr><td>Corridas válidas de MLflow</td><td class="num">12</td><td class="num">12 FINISHED (+2 FAILED excluidas)</td><td><span class="badge ok">Sí</span></td></tr>
+<tr><td>Train / val / test (recortes)</td><td class="num">1022 / 292 / 145</td><td class="num">1022 / 292 / 145 (70.05 / 20.01 / 9.94 %)</td><td><span class="badge ok">Sí</span></td></tr>
+<tr><td>Train / val / test (originales)</td><td class="num">755 / 228 / 107</td><td class="num">755 / 228 / 107 (1090 distintos)</td><td><span class="badge ok">Sí</span></td></tr>
+<tr><td>Accuracy top-1 en test</td><td class="num">0.9793</td><td class="num">142/145 = 0.9793103448</td><td><span class="badge ok">Sí</span></td></tr>
+<tr><td>F1 macro en test</td><td class="num">0.9744</td><td class="num">0.9743519475</td><td><span class="badge ok">Sí</span></td></tr>
+<tr><td>Total de la matriz de confusión</td><td class="num">145</td><td class="num">145 ([30,2,0],[0,38,0],[0,1,74])</td><td><span class="badge ok">Sí</span></td></tr>
+<tr><td>Entrenamiento corto del README</td><td class="num">~28 s, val_acc 0.81</td><td class="num">16.8 s, val_acc 0.7055 (dos veces, idéntico)</td><td><span class="badge parcial">No (dato del README)</span></td></tr>
+</table></div>
+
+<h3>Corridas válidas (experimento p3-clasificador)</h3>
+<div class="tabla"><table>
+<tr><th>Run ID</th><th>optimizer</th><th class="num">batch</th><th class="num">max_epochs</th><th class="num">lr</th><th class="num">img</th><th>hidden</th><th class="num">dropout</th><th class="num">mejor val_acc</th><th class="num">época mejor/parada</th><th>Estado</th></tr>
+<tr><td class="mono">c15c8edf712845a28fdd64e6126907cd</td><td>adamw</td><td class="num">32</td><td class="num">30</td><td class="num">0.0003</td><td class="num">224</td><td>[256]</td><td class="num">0.3</td><td class="num">0.9726</td><td class="num">5/10</td><td>FINISHED</td></tr>
+<tr><td class="mono">eab4973504304baab61a74c93c577a18</td><td>adamw</td><td class="num">64</td><td class="num">30</td><td class="num">0.001</td><td class="num">224</td><td>[512,128]</td><td class="num">0.5</td><td class="num">0.9384</td><td class="num">7/12</td><td>FINISHED</td></tr>
+<tr><td class="mono">46cb41fb9ac744c0a9715771a5a2d0b4</td><td>adam</td><td class="num">64</td><td class="num">30</td><td class="num">0.0003</td><td class="num">128</td><td>[]</td><td class="num">0.2</td><td class="num">0.9829</td><td class="num">11/16</td><td>FINISHED</td></tr>
+<tr><td class="mono">ba8aac02ee2a454f93d8dcb55e6df17f</td><td>sgd</td><td class="num">64</td><td class="num">15</td><td class="num">0.003</td><td class="num">128</td><td>[512,128]</td><td class="num">0.2</td><td class="num">0.9897</td><td class="num">6/11</td><td>FINISHED</td></tr>
+<tr><td class="mono">cb72f7db6b704936bc67f9003a9915eb</td><td>adamw</td><td class="num">32</td><td class="num">15</td><td class="num">0.0003</td><td class="num">128</td><td>[512,128]</td><td class="num">0.5</td><td class="num">0.9623</td><td class="num">3/8</td><td>FINISHED</td></tr>
+<tr><td class="mono">5ebc2c9f94fa491e9e9adc7b7c8184ac</td><td>sgd</td><td class="num">32</td><td class="num">30</td><td class="num">0.001</td><td class="num">224</td><td>[]</td><td class="num">0.3</td><td class="num">0.9966</td><td class="num">3/8</td><td>FINISHED</td></tr>
+<tr><td class="mono">76dc45e27ea14f788b80bd0f11c261ae</td><td>adam</td><td class="num">32</td><td class="num">30</td><td class="num">0.001</td><td class="num">224</td><td>[512,128]</td><td class="num">0.3</td><td class="num">0.9418</td><td class="num">7/12</td><td>FINISHED</td></tr>
+<tr><td class="mono"><b>9f9b62c202f0446a8a4b411a10321eff</b></td><td>adamw</td><td class="num">64</td><td class="num">15</td><td class="num">0.0001</td><td class="num">224</td><td>[]</td><td class="num">0.5</td><td class="num">0.9966</td><td class="num">6/11</td><td>FINISHED (elegido)</td></tr>
+<tr><td class="mono">75d6bbb929514958916d2eb1e0926db0</td><td>sgd</td><td class="num">64</td><td class="num">30</td><td class="num">0.01</td><td class="num">128</td><td>[256]</td><td class="num">0.3</td><td class="num">0.9760</td><td class="num">4/9</td><td>FINISHED</td></tr>
+<tr><td class="mono">26afad93fe5244f69a4aab0c01518b31</td><td>adamw</td><td class="num">32</td><td class="num">30</td><td class="num">0.0001</td><td class="num">160</td><td>[256]</td><td class="num">0.2</td><td class="num">0.9897</td><td class="num">2/7</td><td>FINISHED</td></tr>
+<tr><td class="mono">16c09c8e26fd4e2fa8453f96dfb11af8</td><td>adam</td><td class="num">32</td><td class="num">15</td><td class="num">0.0001</td><td class="num">224</td><td>[256]</td><td class="num">0.2</td><td class="num">0.9932</td><td class="num">7/12</td><td>FINISHED</td></tr>
+<tr><td class="mono">981df1d9a8344c589eeedaa56f30ac76</td><td>sgd</td><td class="num">32</td><td class="num">30</td><td class="num">0.01</td><td class="num">224</td><td>[256]</td><td class="num">0.5</td><td class="num">0.9760</td><td class="num">5/10</td><td>FINISHED</td></tr>
+</table></div>
+<p>Los siete parámetros toman al menos dos valores: optimizer {adam, adamw, sgd}, batch {32, 64}, épocas {15, 30}, lr {1e-4, 3e-4, 1e-3, 3e-3, 1e-2}, imagen {128, 160, 224}, capas {[], [256], [512,128]} y dropout {0.2, 0.3, 0.5}. Las dos FAILED (<code>3d471e3c…</code>, <code>1e05d6ac…</code>) no cuentan.</p>
+
+<h2>E. Resultado final</h2>
+<pre>Suma de secciones:      88 / 100
+Compuerta aplicada:     no
+CALIFICACIÓN FINAL:     88
+Meta de 85% en test:    alcanzada
+Escala:                 Bueno (75-89)</pre>
+
+<h2>F. Comentario para el equipo</h2>
+<ul>
+<li><b>Acierto:</b> M1 quedó resuelto en la combinación de #23, #25 y #26. Desde un clon limpio, Training elige 0.1.3, deshabilita los demás releases con su motivo, lanza en <code>p3-pruebas</code> y conserva el estado y los logs al recargar.</li>
+<li><b>Acierto:</b> la cadena se puede verificar de punta a punta. El manifiesto se regenera idéntico byte a byte y no hay fuga entre particiones. Los pesos de S3 coinciden por SHA-256, y al re-inferir el test sale 142/145 = 0.97931.</li>
+<li><b>Acierto:</b> MLflow restaura su snapshot sin importar el orden de <code>up.py</code> y <code>dvc pull</code>, y conserva 12 corridas válidas con trazabilidad completa.</li>
+<li><b>Pérdida (4 pts):</b> en Models falta la descarga de pesos (6.4), y “Enviar a cola de anotación” da 502 porque P1 no arranca (6.5). Agregar la descarga e integrar P1 al arranque.</li>
+<li><b>Pérdida (4 pts):</b> falta congelar el manifiesto de otro release para que el cambio de versión se vea (1.1), y una prueba de fuga por <code>dup_group_id</code> (7.1).</li>
+<li><b>Pérdida (4 pts):</b> Evaluation no muestra el run, el manifiesto ni las imágenes de los recortes (6.3 y 4.4), y falta un E2E real con MLflow, MinIO y el portal (7.2).</li>
+<li><b>Condición:</b> la nota solo aplica si #23, #25 y #26 se fusionan en <code>fix/m1-training</code>, CI pasa sobre la rama combinada y esa rama llega a <code>main</code>.</li>
+</ul>
+
+<h2>G. Anexo de verificación</h2>
+<h3>Entorno y adaptaciones (limitaciones del entorno, no fallas del equipo)</h3>
+<ul>
+<li>macOS 26 (arm64), Docker 29.2.1, Python 3.12.13 (el host tiene 3.14 por defecto), Node 26.8.2 (CI usa Node 22), sin GPU.</li>
+<li>Clon nuevo en un directorio temporal con <code>push</code> deshabilitado. <code>COMPOSE_PROJECT_NAME=evalp3</code> aísla los volúmenes. <code>MLFLOW_PORT=5001</code> porque AirPlay ocupa el 5000 en macOS.</li>
+<li>Comandos del README adaptados a macOS: <code>.venv/bin</code> en lugar de <code>.venv/Scripts</code>, y <code>PYTHONPATH</code> separado con <code>:</code> en lugar de <code>;</code>. El README usa la sintaxis de Windows.</li>
+</ul>
+<h3>Comandos y resultados</h3>
+<pre>git merge --no-ff origin/feat/fase-2-releases-entrenables origin/fix/m1-training-ui origin/fix/m1-edith  → sin conflictos, HEAD e78163c
+COMPOSE_PROJECT_NAME=evalp3 python3.12 scripts/up.py   → exit 0; mlflow-restore: "Sin snapshot (falta dvc pull)"
+dvc pull -r prod data/raw.dvc                           → OK (1:57); dvc status: "Data and pipelines are up to date."
+dvc pull data/manifests/m-0.1.3-s42-1.dvc mlflow_snapshot.dvc → OK (1:49)
+generate_crops.py --release 0.1.3                       → exit 0 (16 s); crops_jsonl_sha256 d3d61f35… (= tag de las corridas)
+COMPOSE_PROJECT_NAME=evalp3 python3.12 scripts/up.py   → "Snapshot restaurado." + "docker compose restart mlflow"; MLflow: 12 FINISHED + 2 FAILED en p3-clasificador
+Navegador (Playwright + chrome-headless-shell):
+  Overview carga; Training selecciona 0.1.3; 0.1.1/0.1.2/0.1.4/0.1.5 disabled con motivo; errores de página: []
+  Generar manifiesto → m-0.1.3-s42-1 (cat 230/67/32, dog 263/78/38, person 529/147/75)
+  POST /api/p3/training/jobs → 202 {"job_id":"130b7c0b…","status":"queued"}; payload con "experiment":"p3-pruebas"
+  Recarga durante el trabajo → Estado running, Logs (3); final succeeded, run 4de234cd…, val_acc 0.7055 (16.8 s)
+  Segundo lanzamiento igual → job 2908d51a…, run a3d0f98d…, métricas idénticas (train_loss 0.5931, val_acc 0.7055)
+  Config inválida (batch_size 0, dropout 1.5) → errores junto al campo, botón deshabilitado, 0 POST
+API:
+  GET /api/p3/releases → trainable/blocked_reason; solo 0.1.3 trainable
+  POST /api/p3/manifests {release 0.1.2} → 409; POST job batch_size 0 → 422; experiment "produccion" → 422; job m-0.1.2 → 409
+  POST /api/p3/inference (perro de test) → 200 dog 0.999998, model_sha256 e4acca42…; text/plain → 415; 11 MB → 413
+  POST /api/p3/inference/{id}/send-to-annotation → 502 "P1 no aceptó la imagen: Network is unreachable"
+Pruebas:
+  ruff check → All checks passed; ruff format --check → 127 files already formatted
+  pytest (Proyecto3) → 463 passed, 0 failed
+  vitest → 45/45 con NODE_OPTIONS=--no-experimental-webstorage (con Node 26 por defecto fallan 9 por el localStorage global de Node; CI usa Node 22)
+  node --test → 5/5; npm run build (tsc + vite) → OK
+Datos:
+  manifest.jsonl SHA-256 45600f29…4305 = FROZEN_MANIFESTS; 1459 recortes; intersecciones por crop/original/grupo = 0
+  originales distintos por clase: person 441, dog 348, cat 312
+  generate_manifest.py --seed 42 ×2 → mismo SHA-256 que el congelado
+  5 recortes al azar vs COCO: clase, image_id, bbox y tamaño coinciden
+MLflow y test:
+  selection.json: regla "max val_accuracy; desempate min val_loss"; run 9f9b62c2…; seleccionado 2026-09-27T03:39:45Z; evaluado 2026-09-28T02:25:07Z
+  historial val_accuracy del elegido: 11 épocas, mejor 6 (0.997), parada en 11 (patience 5)
+  predictions CSV: 145 filas, todas en test, etiquetas = manifiesto; matriz/accuracy/F1 = API y tarjeta; baseline person 0.5172
+S3 (solo lectura):
+  head-object/get-object 1.0.0 model.pt (VersionId VtRww5se…), MODEL_CARD.md (7LNRNnVo…), 0.9.0 model.pt (ElFQBtWz…)
+  SHA-256 local 1.0.0 = e4acca42…9172 (= registro y selección); ETag es MD5 y no se usa como SHA-256
+  proceso limpio: 1.0.0 → 142/145, 145/145 igual al CSV; 0.9.0 → 142/145 (artefacto distinto, recuperable)
+Portal:
+  Experiments 12 filas; métrica editada en el MLflow aislado (26afad93 best_val_accuracy 0.1234) → la UI muestra 0.123 → restaurada
+  Evaluation: métricas, matriz, ejemplos por crop_id, exportar CSV; sin run/manifiesto; 0 imágenes
+  Models: 0.9.0 y 1.0.0 con run, SHA, "existe", tarjeta, "Usar 0.9.0"; sin descarga</pre>
+<h3>Datos malos inyectados y reacción</h3>
+<pre>Cajas inyectadas en validate_annotations: bbox [10,10,0,25] → degenerate_bbox; caja fuera de la imagen → bbox_out_of_bounds; image_id inexistente → missing_image (ninguna quedó entre las válidas)
+Mutaciones (una a la vez; git checkout después de cada una):
+  M1 quitar "dup_group_id" de LEAKAGE_FIELDS           → SOBREVIVE (463 en verde)
+  M2 split agrupado por original y no por grupo        → DETECTADA (test_e2e_release_a_manifiesto_sin_fuga)
+  M3 matriz transpuesta                                → DETECTADA (test_matriz_con_filas_reales_y_columnas_predichas)
+  M4 no restaurar el mejor checkpoint                  → DETECTADA (test_el_entrenador_para_y_restaura_la_mejor_epoca)
+  M5 RandomHorizontalFlip(p=1.0) en eval (determinista) → SOBREVIVE (caso menor)
+  M5b RandomHorizontalFlip() en eval                   → DETECTADA (test_auditoria_recalcula_y_no_sobrescribe)
+  M5c ColorJitter en eval                              → DETECTADA (test_val_test_e_inferencia_comparten_el_mismo_preprocesamiento)</pre>
+<h3>Diferencias detectadas</h3>
+<ul>
+<li>README: el entrenamiento corto dice “28 s, val_acc 0.81”; aquí dio 16.8 s y 0.7055 (CPU arm64 en Docker), dos veces idéntico.</li>
+<li>El tag <code>env.deterministic</code> se registra distinto en el primer y el segundo trabajo del mismo worker, aunque los resultados son iguales.</li>
+<li>Portal, MLflow, DVC, S3 y el cálculo independiente coinciden en accuracy, F1, matriz, hashes y run elegido.</li>
+</ul>
+<h3>No verificado</h3>
+<ul>
+<li>Activar 0.9.0 desde Models: escribe <code>registry.json</code> en el bucket de producción y no se ejecutó (regla 6). Lo cubren <code>test_models_api.py:69</code> y <code>test_inference.py:122</code>, que pasan.</li>
+<li>La suite de navegador de CI (<code>pantallas.spec.ts</code>): Playwright 1.56 espera Chromium 1194 y en esta máquina solo está el 1243. Los recorridos propios usaron chrome-headless-shell 1243.</li>
+<li>CI de GitHub sobre la rama combinada: no existe en GitHub. Cada PR pasó CI por separado.</li>
+<li>El README en Windows (rutas <code>.venv/Scripts</code>) y el entrenamiento con GPU: no hay equipo disponible.</li>
+<li>“Enviar a cola” con P1 levantado: el README no documenta cómo arrancarlo.</li>
+</ul>
+<h3>Estado final</h3>
+<p>Copia evaluada con <code>git status</code> limpio después de las mutaciones. No se hizo push, no se modificó el repositorio original ni sus ramas, y no se escribió en S3. El stack <code>evalp3</code>, sus volúmenes e imágenes se eliminan al terminar.</p>
+
+<footer>
+  MARTINEZ SANCHEZ, VICTOR HUGO · MLOPS · Otoño 2026<br>
+  <em>Reporte generado automáticamente a partir del estado del repositorio en el commit indicado. La calificación es revisable a solicitud del equipo.</em><br>
+  Evaluación previa preparada por el equipo con el protocolo del docente; no sustituye la calificación oficial.
+</footer>
+
+</div>
+</body>
+</html>
