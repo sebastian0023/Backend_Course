@@ -10,7 +10,6 @@ export const getTourneys = async (_req: Request, res: Response) => {
     res.json(await Tourney.find({}));
 };
 
-// El torneo ya viene validado y cargado por el middleware loadTourney
 export const getTourneyById = async (_req: Request, res: Response) => {
     res.json(res.locals.tournament);
 };

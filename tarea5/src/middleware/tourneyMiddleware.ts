@@ -68,7 +68,6 @@ export const validateParticipantBody = (req: Request, _res: Response, next: Next
     next();
 };
 
-// El registro cierra al terminar el día de la fecha límite (UTC).
 export const ensureRegistrationOpen = (_req: Request, res: Response, next: NextFunction) => {
     const closesAt = new Date(res.locals.tournament.registrationDeadline).getTime() + DAY_MS;
     if (Date.now() >= closesAt) {
@@ -81,12 +80,10 @@ export const notFound = (req: Request, _res: Response, next: NextFunction) => {
     next(new HttpError(404, `Ruta no encontrada: ${req.method} ${req.originalUrl}`));
 };
 
-// Convierte cualquier error en una respuesta JSON con el código apropiado.
 export const errorHandler = (err: any, _req: Request, res: Response, _next: NextFunction) => {
     if (err instanceof HttpError) {
         return res.status(err.status).json({ error: err.message });
     }
-    // JSON mal formado en el body
     if (err?.type === 'entity.parse.failed') {
         return res.status(400).json({ error: 'El cuerpo de la solicitud no es un JSON válido' });
     }

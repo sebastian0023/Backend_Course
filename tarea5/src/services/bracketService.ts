@@ -5,9 +5,9 @@ export interface Entrant {
 }
 
 export interface Slot {
-    participant: string | null;
-    name: string | null;
-    seed: number | null;
+    participant?: unknown;
+    name?: string | null;
+    seed?: number | null;
     isBye: boolean;
 }
 
@@ -15,7 +15,7 @@ export interface Match {
     matchNumber: number;
     player1: Slot;
     player2: Slot;
-    winner?: Slot;
+    winner?: Slot | null;
 }
 
 export interface Round {
