@@ -35,9 +35,6 @@ export const nextPowerOfTwo = (n: number): number => {
     return size;
 };
 
-// Orden estándar de siembra: los mejores se enfrentan a los peores en la
-// primera ronda y los dos mejores solo pueden cruzarse en la final.
-// size 8 -> [1, 8, 4, 5, 2, 7, 3, 6] => 1v8, 4v5, 2v7, 3v6
 export const seedOrder = (size: number): number[] => {
     let order = [1, 2];
     while (order.length < size) {
@@ -50,8 +47,6 @@ export const seedOrder = (size: number): number[] => {
 const roundName = (round: number, totalRounds: number): string =>
     round === totalRounds ? 'Final' : `Round ${round}`;
 
-// Mayor puntaje = mejor ranking. En empate gana quien se registró primero
-// (el arreglo de entrada ya viene en orden de registro y el sort es estable).
 export const rankEntrants = (entrants: Entrant[]): Entrant[] =>
     [...entrants].sort((a, b) => b.score - a.score);
 
@@ -66,7 +61,6 @@ export const buildBracket = (entrants: Entrant[]): { size: number; rounds: Round
 
     const slotForSeed = (seed: number): Slot => {
         const entrant = ranked[seed - 1];
-        // Un seed mayor al número de participantes es un lugar vacío: Bye.
         if (!entrant) return { ...BYE };
         return { participant: entrant.id, name: entrant.name, seed, isBye: false };
     };
@@ -77,7 +71,6 @@ export const buildBracket = (entrants: Entrant[]): { size: number; rounds: Round
         const player1 = slotForSeed(order[i]);
         const player2 = slotForSeed(order[i + 1]);
         const match: Match = { matchNumber: i / 2 + 1, player1, player2 };
-        // Contra un Bye se avanza automáticamente.
         if (player2.isBye) match.winner = player1;
         else if (player1.isBye) match.winner = player2;
         firstRound.push(match);
@@ -101,7 +94,6 @@ export const buildBracket = (entrants: Entrant[]): { size: number; rounds: Round
     return { size, rounds };
 };
 
-// Representación pública: nombres legibles ("Bye" / "TBD" para lugares por definir).
 const slotName = (slot: Slot | undefined | null): string | null => {
     if (!slot) return null;
     if (slot.isBye) return 'Bye';
