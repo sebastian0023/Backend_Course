@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; max-width: 700px; margin: 30px auto; padding: 0 12px; }
+input, textarea { display: block; width: 100%; padding: 6px; margin: 4px 0 10px; box-sizing: border-box; }
+button { padding: 6px 12px; margin-right: 6px; cursor: pointer; }
+.error { color: #b00020; }
+.ok { color: #1b7f3b; }
+.item { border-top: 1px solid #ccc; padding: 8px 0; }

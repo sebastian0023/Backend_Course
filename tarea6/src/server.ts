@@ -4,21 +4,24 @@ import app from './app';
 
 dotenv.config();
 
+const PORT = process.env.PORT || 3000;
 const URL = process.env.URL;
-const PORT = process.env.PORT ?? 3000;
 
-if (!URL) {
-  console.error('Falta la variable de entorno URL');
-  process.exit(1);
+async function start() {
+  if (!URL || !process.env.JWT_SECRET) {
+    console.error("Faltan URL o JWT_SECRET en el archivo .env");
+    process.exit(1);
+  }
+  try {
+    await mongoose.connect(URL);
+    console.log("Conectado a MongoDB");
+    app.listen(PORT, () =>
+      console.log(`Servidor en http://localhost:${PORT}`)
+    );
+  } catch (err) {
+    console.error("No se pudo conectar a MongoDB", err);
+    process.exit(1);
+  }
 }
 
-mongoose
-  .connect(URL)
-  .then(() => {
-    console.log('Conectado a MongoDB');
-    app.listen(PORT, () => console.log(`API en http://localhost:${PORT}`));
-  })
-  .catch((err) => {
-    console.error('Error al conectar a MongoDB:', err);
-    process.exit(1);
-  });
+void start();
