@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>FoundIt - Objetos encontrados</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+</head>
+<body data-page="items">
+    <h1>Objetos encontrados</h1>
+    <p>Hola, <span id="who"></span> <button id="logout">Cerrar sesión</button></p>
+
+    <h2>Registrar objeto encontrado</h2>
+    <form id="createForm">
+        <label>Título</label>
+        <input id="title" required />
+        <label>Descripción</label>
+        <textarea id="description" rows="2" required></textarea>
+        <label>Ubicación</label>
+        <input id="location" required />
+        <label>Fecha del hallazgo</label>
+        <input id="foundDate" type="date" required />
+        <button type="submit">Registrar</button>
+    </form>
+    <p id="createMsg" class="error"></p>
+
+    <div id="detailBox" style="display:none">
+        <h2>Detalle</h2>
+        <div id="detail"></div>
+        <button id="closeDetail">Cerrar detalle</button>
+    </div>
+
+    <h2>Listado</h2>
+    <button id="tabAll">Todos</button>
+    <button id="tabMine">Mis registros</button>
+    <p id="listMsg" class="error"></p>
+    <div id="list"></div>
+
+    <script src="/code/main.js"></script>
+</body>
+</html>

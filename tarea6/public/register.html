@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>FoundIt - Registro</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+</head>
+<body data-page="register">
+    <h1>ITESO FoundIt</h1>
+    <h2>Crear cuenta</h2>
+    <form id="form">
+        <label>Nombre</label>
+        <input id="name" required />
+        <label>Correo electrónico (@iteso.mx)</label>
+        <input id="email" type="email" required />
+        <label>Contraseña (mínimo 6 caracteres)</label>
+        <input id="password" type="password" required />
+        <button type="submit">Registrarme</button>
+    </form>
+    <p id="msg" class="error"></p>
+    <p>Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+
+    <script src="/code/main.js"></script>
+</body>
+</html>
